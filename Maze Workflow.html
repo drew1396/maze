@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze × Unify — GTM Stack Map</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0D0D12;
+    --surface: #13131A;
+    --surface2: #1A1A24;
+    --border: #232330;
+    --border2: #2E2E40;
+    --text: #E8E8F0;
+    --text2: #9090A8;
+    --text3: #5A5A72;
+
+    --unify: #7C6FE8;
+    --unify-dim: rgba(124, 111, 232, 0.12);
+    --unify-border: rgba(124, 111, 232, 0.35);
+
+    --hubspot: #FF7A59;
+    --hubspot-dim: rgba(255, 122, 89, 0.1);
+    --hubspot-border: rgba(255, 122, 89, 0.3);
+
+    --linkedin: #0A66C2;
+    --linkedin-dim: rgba(10, 102, 194, 0.12);
+    --linkedin-border: rgba(10, 102, 194, 0.35);
+
+    --apollo: #E84B4B;
+    --apollo-dim: rgba(232, 75, 75, 0.1);
+    --apollo-border: rgba(232, 75, 75, 0.3);
+
+    --lgm: #22C55E;
+    --lgm-dim: rgba(34, 197, 94, 0.1);
+    --lgm-border: rgba(34, 197, 94, 0.3);
+
+    --clay: #F59E0B;
+    --clay-dim: rgba(245, 158, 11, 0.1);
+    --clay-border: rgba(245, 158, 11, 0.3);
+
+    --nooks: #06B6D4;
+    --nooks-dim: rgba(6, 182, 212, 0.1);
+    --nooks-border: rgba(6, 182, 212, 0.3);
+
+    --signal: #A855F7;
+    --signal-dim: rgba(168, 85, 247, 0.1);
+    --signal-border: rgba(168, 85, 247, 0.3);
+
+    --green: #22C55E;
+    --yellow: #F59E0B;
+    --red: #EF4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ========= LAYOUT ========= */
+  .page { max-width: 1080px; margin: 0 auto; padding: 60px 32px 100px; }
+
+  /* ========= HEADER ========= */
+  .header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 40px;
+    margin-bottom: 48px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .header-meta span { color: var(--text3); }
+  .header-meta .sep { color: var(--border2); }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .header h1 strong { font-weight: 600; }
+  .header-sub {
+    font-size: 15px;
+    color: var(--text2);
+    font-weight: 300;
+    max-width: 580px;
+    line-height: 1.6;
+  }
+  .header-attrs {
+    display: flex;
+    gap: 32px;
+    margin-top: 28px;
+  }
+  .attr-item { }
+  .attr-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 3px;
+  }
+  .attr-val { font-size: 13px; color: var(--text2); font-weight: 400; }
+
+  /* ========= IMPACT STRIP ========= */
+  .impact-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+  .impact-cell {
+    background: var(--surface);
+    padding: 20px 22px;
+  }
+  .impact-cell:hover { background: var(--surface2); }
+  .impact-num {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+  .impact-num.purple { color: var(--unify); }
+  .impact-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  /* ========= LEGEND ========= */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 52px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 12px 5px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-size: 12px;
+    color: var(--text2);
+    font-weight: 400;
+  }
+  .legend-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ========= SECTION HEADERS ========= */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+  .section-desc {
+    font-size: 13px;
+    color: var(--text2);
+    font-weight: 300;
+    margin-bottom: 28px;
+    max-width: 620px;
+    line-height: 1.6;
+  }
+  .section { margin-bottom: 64px; }
+
+  /* ========= STACK TABLE ========= */
+  .stack-table { width: 100%; border-collapse: collapse; }
+  .stack-table thead tr {
+    border-bottom: 1px solid var(--border);
+  }
+  .stack-table th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-weight: 400;
+    padding: 0 16px 12px 0;
+    text-align: left;
+  }
+  .stack-table th:last-child { padding-right: 0; }
+  .stack-table td {
+    padding: 14px 16px 14px 0;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .stack-table td:last-child { padding-right: 0; }
+  .stack-table tr:last-child td { border-bottom: none; }
+  .tool-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .tool-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+  .badge-unify { background: var(--unify-dim); color: var(--unify); border: 1px solid var(--unify-border); }
+  .badge-hubspot { background: var(--hubspot-dim); color: var(--hubspot); border: 1px solid var(--hubspot-border); }
+  .badge-linkedin { background: var(--linkedin-dim); color: #4A9CE8; border: 1px solid var(--linkedin-border); }
+  .badge-apollo { background: var(--apollo-dim); color: var(--apollo); border: 1px solid var(--apollo-border); }
+  .badge-lgm { background: var(--lgm-dim); color: var(--lgm); border: 1px solid var(--lgm-border); }
+  .badge-clay { background: var(--clay-dim); color: var(--clay); border: 1px solid var(--clay-border); }
+  .badge-nooks { background: var(--nooks-dim); color: var(--nooks); border: 1px solid var(--nooks-border); }
+
+  .status-live { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--green); font-family: 'DM Mono', monospace; }
+  .status-building { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--yellow); font-family: 'DM Mono', monospace; }
+  .status-planned { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; }
+  .status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+  /* ========= FLOW DIAGRAMS ========= */
+  .flow-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .flow-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .flow-title { font-size: 14px; font-weight: 500; color: var(--text); }
+  .flow-subtitle { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .flow-status-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .fsb-live { background: rgba(34,197,94,0.1); color: var(--green); border: 1px solid rgba(34,197,94,0.25); }
+  .fsb-building { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.25); }
+  .fsb-proposed { background: rgba(124,111,232,0.1); color: var(--unify); border: 1px solid var(--unify-border); }
+
+  .flow-body { padding: 22px; }
+
+  /* Flow steps as columns */
+  .flow-steps {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+    overflow-x: auto;
+  }
+  .flow-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .step-node {
+    width: 120px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    text-align: center;
+    transition: border-color 0.15s;
+    cursor: default;
+  }
+  .step-node.highlighted {
+    border-color: var(--unify-border);
+    background: var(--unify-dim);
+  }
+  .step-node.dim {
+    opacity: 0.45;
+  }
+  .step-node:hover { border-color: var(--border2); }
+  .step-node.highlighted:hover { border-color: var(--unify); }
+  .step-tool {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .step-action {
+    font-size: 11px;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.35;
+  }
+  .step-note {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 3px;
+    line-height: 1.3;
+  }
+
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+    padding-top: 28px; /* center vertically to node content approx */
+    color: var(--text3);
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .flow-annotation {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(124,111,232,0.06);
+    border: 1px solid var(--unify-border);
+    border-radius: 7px;
+    font-size: 12px;
+    color: var(--text2);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .flow-annotation strong { color: var(--unify); font-style: normal; font-weight: 500; }
+
+  /* ========= OPEN QUESTION ========= */
+  .open-q {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--unify);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin-bottom: 48px;
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+  .open-q strong { color: var(--text); font-weight: 500; }
+
+  /* ========= WHAT'S WORKING / BLOCKERS ========= */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .working-row {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .working-row:last-child { border-bottom: none; }
+  .working-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: rgba(34,197,94,0.15);
+    border: 1px solid rgba(34,197,94,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .working-check svg { color: var(--green); }
+
+  .working-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .working-text strong { color: var(--text); font-weight: 500; }
+
+  .blocker-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .blocker-sev {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .sev-critical { background: rgba(239,68,68,0.1); color: var(--red); border: 1px solid rgba(239,68,68,0.25); }
+  .sev-medium { background: rgba(245,158,11,0.1); color: var(--yellow); border: 1px solid rgba(245,158,11,0.25); }
+  .sev-info { background: var(--unify-dim); color: var(--unify); border: 1px solid var(--unify-border); }
+  .blocker-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .blocker-text strong { color: var(--text); font-weight: 500; }
+
+  /* ========= WHERE UNIFY FITS ========= */
+  .fit-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .fit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    transition: border-color 0.15s;
+  }
+  .fit-card:hover { border-color: var(--border2); }
+  .fit-card.primary {
+    border-color: var(--unify-border);
+    background: rgba(124,111,232,0.05);
+  }
+  .fit-card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .fit-card-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .fit-card-owner {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+  }
+  .fit-card-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .fit-card-desc strong { color: var(--unify); font-weight: 500; }
+
+  /* ========= NEXT STEPS ========= */
+  .next-steps { }
+  .step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-num.highlighted {
+    border-color: var(--unify-border);
+    color: var(--unify);
+    background: var(--unify-dim);
+  }
+  .step-content { flex: 1; }
+  .step-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .step-detail { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .step-timeline {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    padding-top: 4px;
+  }
+
+  /* ========= DIVIDER ========= */
+  .divider { height: 1px; background: var(--border); margin: 52px 0; }
+
+  /* ========= FOOTER NOTE ========= */
+  .footer-note {
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.6;
+    margin-top: 56px;
+    font-style: italic;
+  }
+
+  /* ========= RESPONSIVE ========= */
+  @media (max-width: 700px) {
+    .impact-strip { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .header-attrs { flex-wrap: wrap; gap: 20px; }
+    .flow-steps { padding-bottom: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-meta">
+      <span>Maze × Unify</span>
+      <span class="sep">·</span>
+      <span>GTM Stack Orchestration Map</span>
+      <span class="sep">·</span>
+      <span>Mar 2026</span>
+    </div>
+    <h1>Your Stack,<br><strong>Mapped Out</strong></h1>
+    <div class="header-sub">Here's how I see your outbound motion — signal capture, qualification, and handoff to Apollo and LGM. Tell me where I'm reading this wrong.</div>
+    <div class="header-attrs">
+      <div class="attr-item">
+        <div class="attr-label">Prepared for</div>
+        <div class="attr-val">Joseph Barringhaus, Maze</div>
+      </div>
+      <div class="attr-item">
+        <div class="attr-label">Prepared by</div>
+        <div class="attr-val">Josh Small, Unify</div>
+      </div>
+      <div class="attr-item">
+        <div class="attr-label">Date</div>
+        <div class="attr-val">March 20, 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPACT STRIP -->
+  <div class="impact-strip">
+    <div class="impact-cell">
+      <div class="impact-num">3–5</div>
+      <div class="impact-label">Active Signal Sources</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num purple">Unify</div>
+      <div class="impact-label">Signal + Qual Layer</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">Apollo + LGM</div>
+      <div class="impact-label">Sequencing Execution</div>
+    </div>
+    <div class="impact-cell">
+      <div class="impact-num">HubSpot</div>
+      <div class="impact-label">Source of Truth</div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--unify)"></div>Unify</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--hubspot)"></div>HubSpot</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4A9CE8"></div>LinkedIn</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--apollo)"></div>Apollo</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--lgm)"></div>LaGrowthMachine</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--nooks)"></div>Nooks</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--clay)"></div>Clay (reference)</div>
+  </div>
+
+  <!-- SECTION 1: STACK INVENTORY -->
+  <div class="section">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">Stack Inventory</div>
+    <div class="section-desc">Every tool in the outbound motion, what it does, and where it connects. Let me know if anything's missing or has changed.</div>
+
+    <table class="stack-table">
+      <thead>
+        <tr>
+          <th style="width:150px">Tool</th>
+          <th>Role</th>
+          <th>How it connects</th>
+          <th style="width:90px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tool-badge badge-unify"><span class="tool-dot" style="background:var(--unify)"></span>Unify</span></td>
+          <td>LinkedIn signal tracking, web visitor de-anonymization, agent-based qualification, HubSpot field sync</td>
+          <td>Pushes "most recent play" + qualification output to HubSpot fields; feeds qualified leads downstream</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-hubspot"><span class="tool-dot" style="background:var(--hubspot)"></span>HubSpot</span></td>
+          <td>System of record; list management; triggers for downstream sequencing tools</td>
+          <td>Receives Unify fields; HubSpot workflows trigger Apollo/LGM enrollment</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-linkedin"><span class="tool-dot" style="background:#4A9CE8"></span>LinkedIn</span></td>
+          <td>Primary signal source — company page followers, post engagement (likes/comments), competitor rep tracking</td>
+          <td>Tracked natively in Unify; engagement events trigger qualification workflow</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-apollo"><span class="tool-dot" style="background:var(--apollo)"></span>Apollo</span></td>
+          <td>Email + multi-channel sequencing; receives qualified contacts from HubSpot</td>
+          <td>HubSpot list membership → Apollo sequence enrollment</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-lgm"><span class="tool-dot" style="background:var(--lgm)"></span>LaGrowthMachine</span></td>
+          <td>LinkedIn outreach + connection requests at scale; runs in parallel with Apollo email</td>
+          <td>Receives contacts from HubSpot list filters; requested native integration with Unify</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-nooks"><span class="tool-dot" style="background:var(--nooks)"></span>Nooks</span></td>
+          <td>Cold calling; parallel dialer for reps to action on qualified leads</td>
+          <td>Via HubSpot reports; call tasks assigned to reps from qualified leads</td>
+          <td><span class="status-live"><span class="status-dot"></span>Live</span></td>
+        </tr>
+        <tr>
+          <td><span class="tool-badge badge-clay"><span class="tool-dot" style="background:var(--clay)"></span>Clay</span></td>
+          <td>Previous source for custom qualification logic (company + persona scoring via prompts)</td>
+          <td>Logic being migrated into Unify agents — now running natively</td>
+          <td><span class="status-building"><span class="status-dot"></span>Migrating</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 2: FLOW DIAGRAMS -->
+  <div class="section">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">Outbound Workflows</div>
+    <div class="section-desc">The three core plays. Unify sits at the front — handling LinkedIn tracking, agent qualification, and handoff — so only the right people ever reach Apollo or LGM.</div>
+
+    <!-- FLOW 1: LinkedIn Competitor Signal -->
+    <div class="flow-card">
+      <div class="flow-header">
+        <div>
+          <div class="flow-title">LinkedIn Competitor Signal Play</div>
+          <div class="flow-subtitle">Wiz CSMs, AEs, and competitor-adjacent reps as leading intent signal</div>
+        </div>
+        <div class="flow-status-badge fsb-proposed">Proposed</div>
+      </div>
+      <div class="flow-body">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-node" style="border-color: #4A9CE8; background: rgba(74,156,232,0.08)">
+              <div class="step-tool" style="color:#4A9CE8">LinkedIn</div>
+              <div class="step-action">Wiz / competitor CSMs interact with content</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify</div>
+              <div class="step-action">Identify who liked/commented</div>
+              <div class="step-note">De-anonymize via profile</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify Agent</div>
+              <div class="step-action">Is company ICP-fit?</div>
+              <div class="step-note">Check company signal</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify Agent</div>
+              <div class="step-action">Is person ICP-fit?</div>
+              <div class="step-note">Title / role filter — not sales/mktg</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--hubspot-border); background:var(--hubspot-dim)">
+              <div class="step-tool" style="color:var(--hubspot)">HubSpot</div>
+              <div class="step-action">Push to qualified list</div>
+              <div class="step-note">Unify most recent play field</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--apollo-border); background:var(--apollo-dim)">
+              <div class="step-tool" style="color:var(--apollo)">Apollo</div>
+              <div class="step-action">Email sequence</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--lgm-border); background:var(--lgm-dim)">
+              <div class="step-tool" style="color:var(--lgm)">LGM</div>
+              <div class="step-action">LinkedIn outreach</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-annotation">
+          <strong>The key filter:</strong> "If Jack or Joseph at Maze likes a Wiz post, they don't get into the list. But if a VP of Engineering at an ICP company likes that same post — they should." Unify's agent layer handles this distinction before a single credit is spent on sequencing.
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOW 2: Company Page Follower Play -->
+    <div class="flow-card">
+      <div class="flow-header">
+        <div>
+          <div class="flow-title">Maze Company Page Follower Play</div>
+          <div class="flow-subtitle">High-intent signal — people actively following Maze on LinkedIn</div>
+        </div>
+        <div class="flow-status-badge fsb-proposed">Proposed</div>
+      </div>
+      <div class="flow-body">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-node" style="border-color:#4A9CE8; background:rgba(74,156,232,0.08)">
+              <div class="step-tool" style="color:#4A9CE8">LinkedIn</div>
+              <div class="step-action">New company page follower</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify</div>
+              <div class="step-action">Track + identify follower</div>
+              <div class="step-note">Retroactive data also available</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify Agent</div>
+              <div class="step-action">Company fit check</div>
+              <div class="step-note">Industry, size, tech stack</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify Agent</div>
+              <div class="step-action">Person fit check</div>
+              <div class="step-note">Exclude salespeople, job seekers</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--hubspot-border); background:var(--hubspot-dim)">
+              <div class="step-tool" style="color:var(--hubspot)">HubSpot</div>
+              <div class="step-action">Qualified contact synced</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--lgm-border); background:var(--lgm-dim)">
+              <div class="step-tool" style="color:var(--lgm)">LGM</div>
+              <div class="step-action">LinkedIn connection + message</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-annotation">
+          <strong>Why this signal matters:</strong> Someone following your company page is already warm. The job is making sure it's a prospect, not a curious competitor or a job applicant. That's Unify's role — qualify before it ever reaches LGM or Apollo.
+        </div>
+      </div>
+    </div>
+
+    <!-- FLOW 3: Web Visitor Play -->
+    <div class="flow-card">
+      <div class="flow-header">
+        <div>
+          <div class="flow-title">Web Visitor De-anonymization Play</div>
+          <div class="flow-subtitle">Anonymous site traffic → identified, qualified, actionable</div>
+        </div>
+        <div class="flow-status-badge fsb-proposed">Proposed</div>
+      </div>
+      <div class="flow-body">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-node" style="border-color:rgba(255,255,255,0.15); background:var(--surface2)">
+              <div class="step-tool" style="color:var(--text3)">Web</div>
+              <div class="step-action">Anonymous visitor hits maze.com</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify</div>
+              <div class="step-action">De-anonymize visitor</div>
+              <div class="step-note">IP resolution + enrichment</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node highlighted">
+              <div class="step-tool" style="color:var(--unify)">Unify Agent</div>
+              <div class="step-action">Company + person qualification</div>
+              <div class="step-note">Same logic as LI plays</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--hubspot-border); background:var(--hubspot-dim)">
+              <div class="step-tool" style="color:var(--hubspot)">HubSpot</div>
+              <div class="step-action">Push qualified contact + web visit signal</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--apollo-border); background:var(--apollo-dim)">
+              <div class="step-tool" style="color:var(--apollo)">Apollo</div>
+              <div class="step-action">Email follow-up sequence</div>
+              <div class="step-note">Lightweight, contextual</div>
+            </div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="step-node" style="border-color:var(--nooks-border); background:var(--nooks-dim)">
+              <div class="step-tool" style="color:var(--nooks)">Nooks</div>
+              <div class="step-action">Call task assigned to rep</div>
+              <div class="step-note">High-intent = call first</div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-annotation">
+          <strong>Open question:</strong> What's the right threshold for triggering a call task vs. just email? Is a single web visit enough, or do you want to see a repeat visit + LinkedIn signal before Nooks fires?
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OPEN QUESTION -->
+  <div class="open-q">
+    <strong>Something I want to think through with you:</strong> Right now the agent qualification logic is running after LinkedIn tracking, which means we're spending credits to identify people before we know if they're worth sequencing. Your ideal is to filter title/role before enrichment happens. That's a product constraint today — but the agent logic we've built is already doing the "is this person worth my time" check before anything hits HubSpot or Apollo. Does that feel close enough, or is the pre-enrichment filter still a hard requirement?
+  </div>
+
+  <!-- SECTION 3: WORKING + BLOCKERS -->
+  <div class="section">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">What's Working · What's Not</div>
+    <div class="section-desc">Honest take — not a pitch. These are the things we've built that are delivering, and the things that are still friction.</div>
+
+    <div class="two-col">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:14px;">What's Working</div>
+        <div class="working-row">
+          <div class="working-check"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="working-text"><strong>Agent qualification logic</strong> is working — built out the same logic you were running in Clay. You agreed it's doing what it should.</div>
+        </div>
+
+        <div class="working-row">
+          <div class="working-check"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="working-text"><strong>LinkedIn signal tracking</strong> for Wiz CSMs, AEs, and your company page — these are your highest-signal triggers and they're live.</div>
+        </div>
+        <div class="working-row">
+          <div class="working-check"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="working-text"><strong>HubSpot sync</strong> is fixed and working — qualified contacts flow via "Unify most recent play" field, triggering list membership for Apollo/LGM enrollment.</div>
+        </div>
+        <div class="working-row">
+          <div class="working-check"><svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5L3.5 6.5L7.5 2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="working-text"><strong>Web visitor play</strong> is in progress — de-anonymization → qualification → HubSpot → lightweight email sequence is being stood up this sprint.</div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:14px;">Active Friction</div>
+        <div class="blocker-card">
+          <span class="blocker-sev sev-critical">Critical</span>
+          <div class="blocker-text"><strong>HubSpot activity timeline</strong> — you want web visits and LinkedIn signals showing up as timeline activities so reps can see full context in HubSpot. Currently we only write to fields. This is a real gap and a known FR on our side.</div>
+        </div>
+        <div class="blocker-card">
+          <span class="blocker-sev sev-medium">Medium</span>
+          <div class="blocker-text"><strong>Pre-enrichment title filtering</strong> — today we identify and enrich before qualification, which costs credits on contacts that get filtered out. Your ideal is to filter on title/role before enrichment. FR submitted.</div>
+        </div>
+        <div class="blocker-card">
+          <span class="blocker-sev sev-medium">Medium</span>
+          <div class="blocker-text"><strong>LGM direct integration</strong> — you want a native Unify → LGM push vs. routing through HubSpot. No timeline yet, but the HubSpot path works functionally today.</div>
+        </div>
+        <div class="blocker-card">
+          <span class="blocker-sev sev-info">Info</span>
+          <div class="blocker-text"><strong>Credit efficiency</strong> — narrowed LinkedIn tracking to 3–5 highest-signal groups to stop the bleed. Worth revisiting together once web visitor play is live to see actual cost-per-qualified-lead across both.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECTION 4: WHERE UNIFY FITS -->
+  <div class="section">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">Where Unify Fits in Your Stack</div>
+    <div class="section-desc">This is how I see our role — not the sequencer, not the CRM. The intelligence layer that makes sure only the right people reach your outbound tools.</div>
+
+    <div class="fit-grid">
+      <div class="fit-card primary">
+        <div class="fit-card-label">Core Role</div>
+        <div class="fit-card-title">LinkedIn Tracking + Signal Detection</div>
+        <div class="fit-card-owner">Unify owns this end-to-end</div>
+        <div class="fit-card-desc">Track competitor CSMs, AEs, and company page followers. Unify identifies who's engaging, surfaces them, and passes only relevant signals downstream. <strong>This is the moat.</strong></div>
+      </div>
+      <div class="fit-card primary">
+        <div class="fit-card-label">Core Role</div>
+        <div class="fit-card-title">Agent-Based Qualification</div>
+        <div class="fit-card-owner">Unify owns this — Clay logic migrated in</div>
+        <div class="fit-card-desc">Company fit check, then person fit check. The same logic you built in Clay is now running natively. <strong>Only ICP-fit, non-sales contacts reach HubSpot.</strong> No junk in the funnel.</div>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-label">Handoff</div>
+        <div class="fit-card-title">HubSpot Field Sync</div>
+        <div class="fit-card-owner">Unify → HubSpot</div>
+        <div class="fit-card-desc">Qualified contacts land in HubSpot with "Unify most recent play" populated. HubSpot workflows handle list enrollment and trigger Apollo/LGM. HubSpot stays the source of truth.</div>
+      </div>
+      <div class="fit-card">
+        <div class="fit-card-label">Handoff</div>
+        <div class="fit-card-title">Sequencing Execution</div>
+        <div class="fit-card-owner">Apollo + LGM own this</div>
+        <div class="fit-card-desc">Email via Apollo, LinkedIn outreach via LGM. Nooks for calling. Unify's job ends at qualification — we're not trying to replace your sequencing stack. We make it better.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPEN QUESTION 2 -->
+  <div class="open-q">
+    <strong>The broader frame:</strong> You told me early on that you want Unify to "work within your structure." I've tried to honor that — Unify as signal + qualification, HubSpot as source of truth, Apollo/LGM as execution. The piece I want to validate: do you feel like the agent qualification layer is actually replacing what Clay was doing for you? If there are gaps in the logic, I want to find them now, not at renewal.
+  </div>
+
+  <!-- SECTION 5: NEXT STEPS -->
+  <div class="section">
+    <div class="section-label">Section 05</div>
+    <div class="section-title">Proposed Next Steps</div>
+    <div class="section-desc">What I think we should tackle together over the next 4–6 weeks to lock this workflow in before renewal.</div>
+
+    <div class="next-steps">
+      <div class="step-item">
+        <div class="step-num highlighted">1</div>
+        <div class="step-content">
+          <div class="step-title">Review agent qualification outputs together</div>
+          <div class="step-detail">Walk through a batch of contacts that passed vs. failed the agent. Confirm the logic matches your manual bar — especially for edge cases like security operations roles. If we spot gaps, fix them now.</div>
+        </div>
+        <div class="step-timeline">This week</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num highlighted">2</div>
+        <div class="step-content">
+          <div class="step-title">Stand up web visitor play end-to-end</div>
+          <div class="step-detail">De-anon → agent qual → HubSpot → Apollo email sequence. We agreed George would build the sequence. Goal: have this fully live before end of March so we have real data on web visitor quality.</div>
+        </div>
+        <div class="step-timeline">Mar 28</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num highlighted">3</div>
+        <div class="step-content">
+          <div class="step-title">Measure cost-per-qualified-lead across all active plays</div>
+          <div class="step-detail">Pull actual credit usage vs. qualified contacts pushed to HubSpot for each play. This is the number that matters for renewal — not total credit spend, but credits per lead that's worth reaching out to.</div>
+        </div>
+        <div class="step-timeline">Apr 4</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Align on HubSpot activity timeline path</div>
+          <div class="step-detail">This is the one gap that still bothers me on your behalf. I want to get you a concrete answer — either a timeline for the feature or a workaround that gets you close enough (e.g., custom property webhooks).</div>
+        </div>
+        <div class="step-timeline">Apr 10</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Renewal conversation with real data</div>
+          <div class="step-detail">By end of April, we should have 4–6 weeks of real workflow data — qualified lead volume, credit efficiency, signal-to-meeting attribution. That's the foundation for a renewal conversation that's actually worth having.</div>
+        </div>
+        <div class="step-timeline">Late Apr</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER NOTE -->
+  <div class="footer-note">
+    This is my understanding of your stack and what you're trying to build. Correct me where I'm wrong — especially on the workflow steps and what "ICP-fit" actually means for each play. The goal is to get to a state where this workflow is running on autopilot and the only question is how to expand it, not whether it's working. — Josh
+  </div>
+
+</div>
+
+<!-- EDIT TOOLBAR -->
+<div id="edit-toolbar" style="
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  z-index: 9999;
+  font-family: 'DM Mono', monospace;
+">
+  <div id="edit-status" style="
+    font-size: 11px;
+    color: #5A5A72;
+    letter-spacing: 0.06em;
+    padding: 0 4px;
+    display: none;
+  ">EDIT MODE ON</div>
+  <button id="toggle-edit" onclick="toggleEdit()" style="
+    background: #1A1A24;
+    border: 1px solid #2E2E40;
+    color: #9090A8;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  ">✏ Edit</button>
+  <button id="export-btn" onclick="exportClean()" style="
+    background: #7C6FE8;
+    border: 1px solid rgba(124,111,232,0.5);
+    color: #fff;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-transform: uppercase;
+  ">↓ Export</button>
+</div>
+
+<style>
+  /* Editable element hover/focus styles */
+  body.edit-mode [contenteditable="true"] {
+    outline: none;
+    border-radius: 3px;
+    transition: background 0.1s;
+  }
+  body.edit-mode [contenteditable="true"]:hover {
+    background: rgba(124, 111, 232, 0.07);
+    box-shadow: 0 0 0 2px rgba(124, 111, 232, 0.2);
+    cursor: text;
+  }
+  body.edit-mode [contenteditable="true"]:focus {
+    background: rgba(124, 111, 232, 0.1);
+    box-shadow: 0 0 0 2px rgba(124, 111, 232, 0.4);
+  }
+  #toggle-edit:hover {
+    border-color: #7C6FE8;
+    color: #7C6FE8;
+  }
+  #export-btn:hover {
+    background: #6A5FD4;
+  }
+</style>
+
+<script>
+  let editMode = false;
+
+  // All selectors that should be editable
+  const EDITABLE_SELECTORS = [
+    'h1', '.header-sub', '.attr-val',
+    '.impact-num', '.impact-label',
+    '.section-title', '.section-desc',
+    '.flow-title', '.flow-subtitle', '.flow-annotation',
+    '.step-action', '.step-note', '.step-tool',
+    '.open-q', '.working-text', '.blocker-text',
+    '.fit-card-title', '.fit-card-desc', '.fit-card-owner', '.fit-card-label',
+    '.step-title', '.step-detail', '.step-timeline',
+    '.footer-note', '.attr-label', '.legend-item',
+    'td', 'th'
+  ];
+
+  function toggleEdit() {
+    editMode = !editMode;
+    const btn = document.getElementById('toggle-edit');
+    const status = document.getElementById('edit-status');
+    const body = document.body;
+
+    if (editMode) {
+      body.classList.add('edit-mode');
+      btn.textContent = '✓ Done';
+      btn.style.background = '#1A2A1A';
+      btn.style.borderColor = 'rgba(34,197,94,0.4)';
+      btn.style.color = '#22C55E';
+      status.style.display = 'block';
+
+      // Make elements editable
+      EDITABLE_SELECTORS.forEach(sel => {
+        document.querySelectorAll(sel).forEach(el => {
+          // Skip elements that contain complex nested structure (like tool-badge, status badges)
+          if (!el.querySelector('.tool-badge') && !el.querySelector('.status-live') && 
+              !el.querySelector('.status-building') && !el.querySelector('.legend-dot') &&
+              !el.querySelector('.working-check') && !el.querySelector('.blocker-sev') &&
+              !el.querySelector('svg')) {
+            el.contentEditable = 'true';
+            el.setAttribute('spellcheck', 'false');
+          }
+        });
+      });
+    } else {
+      body.classList.remove('edit-mode');
+      btn.textContent = '✏ Edit';
+      btn.style.background = '#1A1A24';
+      btn.style.borderColor = '#2E2E40';
+      btn.style.color = '#9090A8';
+      status.style.display = 'none';
+
+      // Remove editable
+      document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+        el.contentEditable = 'false';
+      });
+    }
+  }
+
+  function exportClean() {
+    // Capture current edited HTML
+    const wasEditing = editMode;
+    if (wasEditing) toggleEdit(); // turn off edit mode first to clean state
+
+    // Clone the whole document
+    const clone = document.documentElement.cloneNode(true);
+
+    // Remove the toolbar and injected styles/scripts from the clone
+    const toolbar = clone.querySelector('#edit-toolbar');
+    if (toolbar) toolbar.remove();
+
+    // Remove contenteditable attributes
+    clone.querySelectorAll('[contenteditable]').forEach(el => {
+      el.removeAttribute('contenteditable');
+      el.removeAttribute('spellcheck');
+    });
+
+    // Remove edit-mode class
+    clone.querySelector('body').classList.remove('edit-mode');
+
+    // Remove the last <style> and <script> blocks we injected (edit UI)
+    const scripts = clone.querySelectorAll('script');
+    scripts.forEach(s => s.remove());
+
+    // Build clean HTML
+    const html = '<!DOCTYPE html>\n<html lang="en">\n' + clone.innerHTML + '\n</html>';
+
+    // Download
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'maze-gtm-stack-map-clean.html';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    // Restore edit mode if it was on
+    if (wasEditing) setTimeout(() => toggleEdit(), 100);
+  }
+
+  // Keyboard shortcut: Cmd/Ctrl+E to toggle edit
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'e') {
+      e.preventDefault();
+      toggleEdit();
+    }
+  });
+</script>
+
+</body>
+</html>
